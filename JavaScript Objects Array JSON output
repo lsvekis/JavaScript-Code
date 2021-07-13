@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+    <head><title>Tester</title></head>
+    <body>
+        <div class="output"></div>
+        <script>
+            const output = document.querySelector(".output");
+            const myObj = {
+	"people": [{
+			"firstName": "Laurence",
+			"lastName": "Svekis"
+		},
+		{
+			"firstName": "Joe",
+			"lastName": "Smith"
+		}
+	],
+	"cars": [{
+			"Ford": [{
+					"year": 1980,
+					"make": "Mustang"
+				},
+				{
+					"year": 1990,
+					"make": "F150"
+				}
+			]
+		},
+		{
+			"Chevrolet": [{
+					"year": 1977,
+					"make": "Camaro"
+				},
+				{
+					"year": 2001,
+					"make": "Corvette"
+				}
+			]
+		}
+        ,
+		{
+			"Honda": [{
+					"year": 1987,
+					"make": "Civic"
+				},
+				{
+					"year": 2011,
+					"make": "Accord"
+				}
+			]
+		}
+	]
+};
+            //console.log(myObj);
+            myObj.people.forEach((person)=>{
+                //console.log(person);
+                output.innerHTML += `<div>${person.firstName} ${person.lastName}</div>`
+            })
+
+            myObj.cars.forEach((ele,index)=>{
+                const ky = Object.keys(ele)[0];
+                output.innerHTML += `<h1>${ky}</h1>`;
+                const arr = myObj.cars[index][ky];
+                console.log(arr);
+                arr.forEach((car)=>{
+                    console.log(car);
+                    output.innerHTML += `${car.make} ${car.year} <br>`;
+                })
+            })
+
+        </script>
+    </body>
+</html>

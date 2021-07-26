@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>JavaScript Accordion</title>
+    <style>
+        .myText {
+            display: none;
+            width:100%;
+            border: 1px solid black;
+            background-color: aliceblue;
+            min-height: 100px;
+            padding: 5px;
+        }
+        .title{
+            text-align: center;
+            font-size: 1.5em;
+            background-color: blanchedalmond;
+            padding: 5px;
+        }
+        .active {
+            display: block !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="output">
+        <div class="title">JavaScript Accordion #1</div>
+        <div class="myText">1 JavaScript Accordion text content JavaScript Accordion</div>
+        <div class="title">JavaScript Accordion #2</div>
+        <div class="myText">2 JavaScript Accordion text content JavaScript Accordion</div>
+        <div class="title">JavaScript Accordion #3</div>
+        <div class="myText">3 JavaScript Accordion text content JavaScript Accordion</div>
+        <div class="title">JavaScript Accordion #4</div>
+        <div class="myText">4 JavaScript Accordion text content JavaScript Accordion</div>
+        <div class="title">JavaScript Accordion #5</div>
+        <div class="myText">5 JavaScript Accordion text content JavaScript Accordion</div>
+    </div>
+    <script src="accordion.js"></script>
+</body>
+
+</html>
+
+const titles = document.querySelectorAll('.title');
+const textDiv = document.querySelectorAll('.myText');
+
+titles.forEach((el)=>{
+    el.addEventListener('click',(e)=>{
+        console.log(el.nextElementSibling);
+        //removeActive();
+        el.nextElementSibling.classList.toggle('active');
+    })
+})
+
+function removeActive(){
+    const activeEles = document.querySelectorAll('.active');
+    activeEles.forEach((el)=>{
+        el.classList.remove('active');
+    })
+}

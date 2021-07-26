@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>JavaScript </title>
+    <style>
+        .textContent{
+            width:100%;
+            height:200px;
+        }
+        .results{
+           background-color:bisque;
+           border:1px solid black;
+           width:100%; 
+        }
+    </style>
+</head>
+<body>
+    <div class="output">
+        <textarea name="txtarea" class="textContent">dj askajsd kjksad svekis@gmail.com laurence svekis1@gmail.com</textarea>
+        <br><button>Get Email</button>
+        <select><option value=";">;</option>
+            <option value=",">,</option>
+            <option value=" "> </option></select>
+        <div class="results"></div>
+    </div>
+    <script src="email.js"></script>
+</body>
+</html>
+
+const rawText = document.querySelector('textarea[name="txtarea"]');
+const btn = document.querySelector('button');
+const output = document.querySelector('.results');
+const sel = document.querySelector('select');
+btn.addEventListener('click',()=>{
+    console.log(sel.value);
+    let temp = rawText.value;
+    let exp = /([A-Za-z0-9._-]+@[A-Za-z0-9._-]+\.[A-Za-z0-9._-]+)/gi;
+    let emails = temp.match(exp);
+    let holder = [];
+    emails.forEach((email)=>{
+        console.log(email);
+        if(!holder.includes(email)){
+            holder.push(email);
+        }
+    })
+    console.log(holder);
+    let tempHolder = holder.join(sel.value);
+    console.log(`Emails Found ${holder.length}`);
+    output.innerHTML = `Emails Found : ${holder.length}`;
+    const div = document.createElement('div');
+    output.append(div);
+    const newResults = document.createElement('textarea');
+    newResults.style.width = '100%';
+    div.append(newResults);
+    newResults.value = tempHolder;
+    newResults.addEventListener('click',()=>{
+        newResults.select();
+    })
+})

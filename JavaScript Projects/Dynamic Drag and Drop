@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>JavaScript Dynamic Drag and Drop </title>
+    <style>
+        * {
+            box-sizing:border-box;
+            margin:0;
+            padding:0;
+        }
+        .container{
+            height:100vh;
+            flex-direction : column;
+            align-items:center;
+            justify-content:center;
+        }
+        .output{
+            display:grid;
+            align-items:center;
+        }
+        .box{
+            min-height:80px;
+            border:1px solid #ccc;
+            display:inline-flex;
+            align-items:center;
+            justify-content:center;
+        }
+        .drag-over{
+            border:dashed 4px green;
+        }
+        .hide{
+            display:none;
+        }
+        .item{
+            cursor:move;
+            padding:10px;
+            width:80px;
+            height:80px;
+            text-align:center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+    <div><button>Add One</button></div>
+    <div class="output"></div>
+</div>
+    <script src="dyno.js"></script>
+</body>
+</html>
+
+const g = {
+    items:0,
+    size:4,
+    id :{},
+    box:{}
+};
+let output = document.querySelector('.output');
+const btn = document.querySelector('button');
+btn.addEventListener('click', addDropper);
+
+document.addEventListener('DOMContentLoaded',()=>{
+    console.log('ready');
+    output.style.gridTemplateColumns = `repeat(${g.size}, 1fr)`;
+    output.style.gridTemplateRows = `repeat(${g.size}, 1fr)`;
+    let cell = 0;
+    for(let x=0;x<g.size;x++){
+        for(let y=0;y<g.size;y++){
+            const el =  createSquare();
+            el.addEventListener('dragenter', dragEnter);
+            el.addEventListener('dragover', dragOver);
+            el.addEventListener('dragleave', dragLeave);
+            el.addEventListener('drop', dragDrop);
+        }
+    }
+    addDropper();
+})
+
+function createSquare(){
+    const div = document.createElement('div');
+    div.classList.add('box');
+    output.append(div);
+    return div;
+}
+
+function addDropper(){
+    g.items++;
+    const div = document.createElement('div');
+    const first = output.querySelector('.box');
+    first.append(div);
+    let ranColor = Math.random().toString(16).substr(-6);
+    div.style.backgroundColor = '#'+ranColor;
+    div.textContent = 'ID ' + g.items;
+    div.setAttribute('id','id'+g.items);
+    div.classList.add('item');
+    div.setAttribute('draggable',true);
+    div.addEventListener('dragstart', dragStart);
+}
+
+function dragStart(e){
+    g.id = e.target.id;
+    console.log(g.id);
+}
+
+function dragEnter(e){
+    e.preventDefault();
+    g.box = e.target.closest('.box');
+    e.target.classList.add('drag-over');
+    console.log(g.id);
+}
+function dragOver(e){
+    e.preventDefault();
+    moveBox();
+    e.target.classList.add('drag-over');
+    console.log(g.id);
+}
+function dragLeave(e){
+    console.log(g.id);
+    moveBox();
+    e.target.classList.remove('drag-over');
+}
+function dragDrop(e){
+    console.log(g.id);
+    e.target.classList.remove('drag-over');
+    g.box = e.target.closest('.box');
+    moveBox();
+}
+
+function moveBox(){
+    const draggedEle = document.getElementById(g.id);
+    const temp = g.box.appendChild(draggedEle);
+    console.log(temp);
+    return draggedEle;
+}
+

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+    <head><title>Image preview</title>
+        <style>
+            .thumb{
+                max-height:100px;
+            }
+            .popup{
+                width:60%;
+                height:40%;
+                position:absolute;
+                top:10%;
+                left:20%;
+                background-color:rgba(0,0,0,.66);
+            }
+            .popup img{
+                max-width:100%;
+                margin:auto;
+                border:5px solid white;
+                box-shadow: 10px 10px grey;            }
+        </style>
+    </head>
+    <body>
+        <input type="file" multiple accept="image/*" id="myImages"/>
+        <div class="preview"></div>
+        <script src="image.js"></script>
+    </body>
+</html>
+
+const preview = document.querySelector('.preview');
+const myInput = document.querySelector('#myImages');;
+const popWindow = document.createElement('div');
+
+const popImage = document.createElement('img');
+popWindow.append(popImage);
+popWindow.style.display = 'none';
+popWindow.classList.add('popup');
+document.body.append(popWindow);
+popWindow.addEventListener('click',()=>{
+    popWindow.style.display = 'none';
+})
+
+myInput.addEventListener('change',upload);
+
+function upload(e){
+    const files = e.target.files;
+    console.log(files);
+    for(let i =0;i<files.length;i++){
+        const file = files[i];
+        const img = document.createElement('img');
+        img.classList.add('thumb');
+        img.file = file;
+        img.addEventListener('click',(ee)=>{
+            console.log(img.src);
+            popup(img.src);
+        })
+        preview.append(img);
+        const reader = new FileReader();
+        reader.onload = ((myImg)=>{
+            return (ele)=>{
+                myImg.src = ele.target.result;
+            }
+        })(img);
+        reader.readAsDataURL(file);
+    }
+
+
+
+}
+
+function popup(img){
+    popImage.setAttribute('src',img);
+    popWindow.style.display = 'block';
+}

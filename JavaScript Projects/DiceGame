@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Dice Game</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        .viewer {
+            display: inline-block;
+            width: 220px;
+            height: 180px;
+            border: 1px solid black;
+            padding: 5px;
+        }
+
+        .viewer span {
+            display: block;
+        }
+
+        .viewer span:first-child {
+            color: red;
+            text-align: center;
+            font-size: 1.5em;
+        }
+
+        .viewer span:last-child {
+            color: black;
+            text-align: center;
+            font-size: 3em;
+        }
+
+        .output {
+            width: 440px;
+            text-align: center;
+            font-size: 2em;
+        }
+
+        .dot {
+            width: 100%;
+            height: 30px;
+            border-radius: 50%;
+            padding: 5px;
+        }
+
+        .parentDice {
+            border: 1px solid #ddd;
+            padding: 20px;
+            display: grid;
+            grid-gap: 1px;
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .btn {
+            width: 440px;
+            height: 50px;
+            background-color: red;
+            color: white;
+            font-size: 2em;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="gamearea">
+        <div class="output"></div>
+        <div class="viewer">
+            <span class="playerName">Player 1</span>
+            <span id="player1"></span>
+        </div>
+        <div class="viewer">
+            <span class="playerName">Player 2</span>
+            <span id="player2"></span>
+        </div>
+    </div>
+    <button type="button" class="btn">Roll Dice</button>
+    <script src="dice.js"></script>
+</body>
+
+</html>
+
+
+const btn = document.querySelector('.btn');
+const output = document.querySelector('.output');
+const py1 = document.querySelector('#player1');
+const py2 = document.querySelector('#player2');
+const dice = [
+    [5],
+    [1, 9],
+    [1, 5, 9],
+    [1, 3, 7, 9],
+    [1, 3, 5, 7, 9],
+    [1, 3, 4, 6, 7, 9]
+];
+
+btn.addEventListener('click', () => {
+    const rolls = [rollDice(6), rollDice(6)];
+    let result;
+    if (rolls[0] === rolls[1]) {
+        result = "Draw";
+    } else if (rolls[0] > rolls[1]) {
+        result = "Player 1 Wins";
+    } else {
+        result = "Player 2 Wins";
+    }
+    updateDice(py1, rolls[0]);
+    updateDice(py2, rolls[1]);
+    //${rolls[0]} vs ${rolls[1]} <br>
+    output.innerHTML = `${result}`;
+})
+
+function updateDice(el, num) {
+    el.innerHTML = "";
+    const holder = builder(num);
+    el.append(holder);
+}
+
+function builder(num) {
+    const div = document.createElement('div');
+    const addColor = dice[num - 1];
+    console.log(addColor);
+    for (let x = 1; x < 10; x++) {
+        const el1 = document.createElement('div');
+        el1.classList.add('dot');
+        if (addColor.includes(x)) {
+            el1.style.backgroundColor = "black";
+        }
+        div.append(el1);
+    }
+    div.classList.add('parentDice');
+    return div;
+}
+
+function rollDice(num) {
+    const rollValue = Math.floor(Math.random() * num) + 1;
+    return rollValue;
+}

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Dice Game</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        .viewer {
+            display: inline-block;
+            min-width:150px;
+            height: 180px;
+            border: 1px solid black;
+            padding: 5px;
+        }
+
+        .viewer span {
+            display: block;
+        }
+
+        .viewer span:first-child {
+            color: red;
+            text-align: center;
+            font-size: 1.5em;
+        }
+
+        .viewer span:last-child {
+            color: black;
+            text-align: center;
+            font-size: 3em;
+        }
+
+        .output {
+            width: 100%;
+            text-align: center;
+            font-size: 2em;
+        }
+
+        .eles{
+            font-size:2em;
+            display:block;
+        }
+        .dot {
+            width: 100%;
+            height: 30px;
+            border-radius: 50%;
+            padding: 5px;
+        }
+        .main{
+           display:flex;
+           justify-content :center;
+        }
+        .parentDice {
+            border: 1px solid #ddd;
+            padding: 20px;
+            display: grid;
+            grid-gap: 1px;
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .btn {
+            width: 100%;
+            height: 50px;
+            background-color: red;
+            color: white;
+            font-size: 2em;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="gamearea">
+    </div>
+    <script src="dice.js"></script>
+</body>
+
+</html>
+
+const howMany = document.createElement('input');
+const gameArea = document.querySelector('.gamearea');
+howMany.setAttribute('type','number');
+howMany.classList.add('eles');
+howMany.value = 4;
+const message = document.createElement('div');
+gameArea.append(message);
+message.classList.add('output');
+const output = document.createElement('div');
+gameArea.append(output);
+output.classList.add('main');
+
+output.append(howMany);
+const btn1 = document.createElement('button');
+btn1.textContent = "Start Game";
+output.append(btn1);
+btn1.addEventListener('click',startGame);
+btn1.classList.add('eles');
+const btn2 = document.createElement('button');
+gameArea.append(btn2);
+btn2.classList.add('btn');
+btn2.textContent = "RollDice";
+btn2.style.display = 'none';
+const game = {players:[]};
+const dice = [
+    [5],
+    [1, 9],
+    [1, 5, 9],
+    [1, 3, 7, 9],
+    [1, 3, 5, 7, 9],
+    [1, 3, 4, 6, 7, 9]
+];
+
+
+function startGame(){
+    //console.log(howMany.value);
+    output.innerHTML = "";
+    btn2.style.display = 'block';
+    for(let x=0;x<howMany.value;x++){
+        console.log(x);
+        const temp = document.createElement('div');
+        temp.classList.add('viewer');
+        const span1 = document.createElement('span');
+        span1.textContent = `Player ${x+1}`;
+        temp.append(span1);
+        const span2 = document.createElement('span');
+        span2.textContent = "";
+        temp.append(span2);
+        output.append(temp);
+        game.players.push(span2);
+    }
+}
+
+
+
+btn2.addEventListener('click', () => {
+    const rolls = [];
+    let highest = 0;
+    const winners = [];
+    for(let x=0;x<game.players.length;x++){
+        let val = rollDice(6);
+        rolls.push(val);
+        if(val > highest){
+            highest = val;
+        }
+        updateDice(game.players[x], val);
+    }
+    for(let x=0;x<rolls.length;x++){
+        if(rolls[x] === highest){
+            winners.push(`Player ${x+1}`);
+        }
+    }
+    let winnerList = winners.toString();
+    message.innerHTML = `Highest Roll is ${highest}<br><small>Winners List ${winnerList}</small>`;
+    
+})
+
+function updateDice(el, num) {
+    el.innerHTML = "";
+    const holder = builder(num);
+    el.append(holder);
+}
+
+function builder(num) {
+    const div = document.createElement('div');
+    const addColor = dice[num - 1];
+    console.log(addColor);
+    for (let x = 1; x < 10; x++) {
+        const el1 = document.createElement('div');
+        el1.classList.add('dot');
+        if (addColor.includes(x)) {
+            el1.style.backgroundColor = "black";
+        }
+        div.append(el1);
+    }
+    div.classList.add('parentDice');
+    return div;
+}
+
+function rollDice(num) {
+    const rollValue = Math.floor(Math.random() * num) + 1;
+    return rollValue;
+}

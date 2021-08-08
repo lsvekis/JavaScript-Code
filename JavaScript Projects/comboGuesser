@@ -1,0 +1,114 @@
+const output = document.querySelector('.output');
+const message = document.createElement('div');
+const gameArea = document.createElement('div');
+const btn = document.createElement('button');
+const game = {guesses:0,num:4};
+output.append(message);
+output.append(gameArea);
+output.append(btn);
+btn.classList.add('btn');
+message.classList.add('message');
+btn.textContent = 'Start Game';
+outputMessage('Click button to start game');
+
+btn.addEventListener('click',(e)=>{
+    if(btn.textContent === 'Start Game'){
+        game.guesses = 0;
+        makeBoard();
+        btn.textContent = 'Check Answer';
+        outputMessage('Guess the combo adjust the dials');
+    } else if(btn.textContent === 'Check Answer'){
+        checkAnswer();
+        game.guesses++;
+    }
+})
+
+function checkAnswer(){
+    const combos = document.querySelectorAll('.dial');
+    let winners = 0;
+    combos.forEach((el)=>{
+        //console.log(el.correct);
+        el.style.color = 'white';
+        if(el.correct == el.value){
+            winners++;
+            el.style.backgroundColor = 'green';
+        } else if(el.correct > el.value){
+            el.style.backgroundColor = 'red';  
+        } else if(el.correct < el.value){
+            el.style.backgroundColor = 'blue';  
+        }
+    })
+    if(winners === combos.length){
+        
+        gameOver();
+    }else{
+        outputMessage(`You got ${winners} of ${combos.length} (${game.guesses})`);
+    }
+}
+
+function gameOver(){
+    outputMessage(`Game Over it took ${game.guesses} guesses`);
+    btn.textContent = 'Start Game';
+}
+
+function makeBoard(){
+    gameArea.innerHTML = "";
+    for(let x=0;x<game.num;x++){
+        const ele = document.createElement('input');
+        ele.setAttribute('type','number');
+        ele.max = 9;
+        ele.min = 0;
+        ele.correct = Math.floor(Math.random()*10);
+        ele.classList.add('dial');
+        ele.value = 5;
+        gameArea.append(ele);
+    }
+}
+
+function outputMessage(html){
+    message.innerHTML = html;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Combo Game</title>
+    <style>
+        .dial{
+            width:60px;
+            border-radius:20px;
+            text-align:center;
+            padding:5px;
+            font-size:3em;
+            margin:5px;
+        }
+        .btn{
+            width:100%;
+            padding:15px;
+            font-size:2em;
+            background-color:black;
+            color:white;
+            margin:10px 0;
+        }
+        .output{
+            width:80%;
+            margin:auto;
+            text-align:center;
+            padding:10px;
+            background-color:bisque;
+        }
+        .message{
+            background-color:coral;
+            color:white;
+            font-family:Verdana, Geneva, Tahoma, sans-serif;
+            padding:10px;
+            font-size:1.2em;
+        }
+    </style>
+</head>
+<body>
+    <div class="output"></div>
+    <script src="combo.js"></script>
+</body>
+</html>
+

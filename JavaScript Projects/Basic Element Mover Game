@@ -1,0 +1,89 @@
+const gameArea = document.querySelector('.game');
+const message = maker(gameArea,'div','message','Message');
+const scoreBoard = maker(gameArea,'div','scoreboard','SCOREBOARD');
+const gamePlay = maker(gameArea,'div','gamePlay','GAME AREA');
+const box = maker(gamePlay,'div','box',' ');
+const game = {ani:null,x:0,y:0,speed:5};
+const keyz = {
+    ArrowDown: false,
+    ArrowLeft: false,
+    ArrowRight: false,
+    ArrowUp: false
+};
+
+window.addEventListener('keydown',(e)=>{
+    if(e.code in keyz){keyz[e.code] = true;}
+})
+window.addEventListener('keyup',(e)=>{
+    if(e.code in keyz){keyz[e.code] = false;}
+})
+game.ani = window.requestAnimationFrame(mover);
+
+function mover(){
+    if(keyz.ArrowDown){
+        game.y+=game.speed;
+    }else if(keyz.ArrowUp){
+        game.y-=game.speed;
+    }
+    if(keyz.ArrowLeft){
+        game.x-=game.speed;
+    }else if(keyz.ArrowRight){
+        game.x+=game.speed;
+    }
+    box.style.left = game.x + 'px';
+    box.style.top = game.y + 'px';
+    game.ani = window.requestAnimationFrame(mover);
+}
+
+function maker(parent,myType,myClass,html){
+    const ele = document.createElement(myType);
+    parent.append(ele);
+    ele.classList.add(myClass);
+    ele.innerHTML = html;
+    return ele;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Game Basics</title>
+    <style>
+        *{
+            box-sizing:border-box;
+        }
+        .game{
+            width:90%;
+            margin:auto;
+            text-align:center;
+        }
+        .message{
+            padding:10px;
+            font-size:1.2em;
+            background-color:beige;
+        }
+        .scoreboard{
+            background-color:black;
+            color:white;
+            padding:15px;
+        }
+        .gamePlay{
+            height:500px;
+            width:100%;
+            background-color:#ddd;
+            position:relative;
+            overflow:hidden;
+        }
+        .box{
+            width:50px;
+            height:50px;
+            background-color:red;
+            position:absolute;
+            z-index:100;
+        }
+    </style>
+</head>
+<body>
+    <div class="game"></div>
+    <script src="game.js"></script>
+</body>
+</html>

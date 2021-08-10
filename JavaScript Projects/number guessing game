@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Number Guess</title>
+    <style>
+        *{
+            box-sizing:border-box;
+        }
+        .output{
+            width:90%;
+            margin:auto;
+            background-color:beige;
+            text-align:center;
+            padding:20px;
+            font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+        }
+        .main{
+            padding:10px;
+            background-color:black;
+            color:white;
+            font-size:1.5em;
+            margin:10px 0;
+        }
+        .btn{
+            margin:10px;
+            width:80%;
+            margin:auto;
+            display:block;
+            font-size:1.7em;
+        }
+        .guess{
+            width:60%;
+            font-size:2em;
+            margin:auto;
+            display:block;
+            text-align:center;
+        }
+    </style>
+</head>
+<body>
+    <div class="output"></div>
+    <script src="guess.js"></script>
+</body>
+</html>
+
+const output = document.querySelector('.output');
+const main = maker('div',output,'main','Press Button to Start');
+const guess = maker('input',output,'guess','');
+const btn = maker('button',output,'btn','Start Game');
+const game = {hiddenNum : 0,inplay:false,max:10,score:0};
+guess.setAttribute('type','number');
+guess.style.display = 'none';
+
+btn.addEventListener('click',()=>{
+    if(!game.inplay){
+        game.num = genNumber(game.max);
+        game.inplay = true;
+        game.score = 0;
+        btn.textContent = "Guess Value";
+        guess.style.display = 'block';
+        message(`Guess the number from 0 - ${game.max}`,'black')
+    }else{
+        game.score++;
+        let val = Number(guess.value);
+        guess.value="";
+        if(val === game.num){
+            message(`Your Guess ${game.num} is Correct!<br>Total Guesses : (${game.score}) `, 'green');
+            endGame();
+        } else if(val > game.num){ 
+            message(`${val} was too high `,'red')
+        } else if(val < game.num){
+            message(`${val} was too low `,'blue')
+        }
+    }
+})
+
+function endGame(){
+    btn.textContent = "Restart Game";
+    game.inplay = false;
+    guess.style.display = 'none';
+    game.max=genNumber(100);
+}
+
+function message(html,txColor){
+    main.innerHTML = html;
+    main.style.backgroundColor = txColor;
+
+}
+
+
+
+function genNumber(max){
+    return Math.floor(Math.random()*max +1);
+}
+
+
+function maker(eleType,elParent,eleClass,html){
+    const ele= document.createElement(eleType);
+    ele.classList.add(eleClass);
+    ele.innerHTML = html;
+    elParent.append(ele);
+    return ele;
+}

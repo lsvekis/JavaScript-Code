@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Code Example</title>
+</head>
+<body>
+    <input type="file" class="myImage">
+    <canvas id="canvas"></canvas>
+    <script src="app1.js"></script>
+</body>
+</html>
+
+console.log('ready');
+const myInput = document.querySelector('.myImage');
+const canvas = document.querySelector('#canvas');
+const ctx = canvas.getContext('2d');
+myInput.addEventListener('change',(e)=>{
+    console.log('changed');
+    const img = new Image();
+    img.onload = update;
+    img.onerror = errorMessage;
+    img.src = URL.createObjectURL(myInput.files[0]);
+})
+
+function update(){
+    console.log(this.width);
+    const wid = this.width/5;
+    const hei = this.height/5;
+    canvas.width = wid;
+    canvas.height = hei;
+    ctx.drawImage(this,0,0,wid,hei);
+}
+
+function errorMessage(){
+    console.error('wrong file type');
+}

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Code Example</title>
+  <style>
+      .box{
+          width:100px;
+          border:1px dotted red;
+          height:50px;
+          padding:10px;
+      }
+  </style>
+</head>
+<body>
+    <div class="output1">
+        <div class="one box">1
+            <div class="two box">2
+                <div class="three box">3
+                    Inside
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="output2">
+        <div class="one box">1
+            <div class="two box">2
+                <div class="three box">3
+                    Inside
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="app3.js"></script>
+</body>
+</html>
+
+
+const output1 = document.querySelector('.output1');
+output1.style.border = '1px solid black';
+//output1.textContent = 'click me';
+output1.style.textAlign = 'center';
+output1.style.width= '200px';
+output1.style.height = '150px';
+output1.style.margin = 'auto';
+const output2 = document.querySelector('.output2');
+output2.style.border = '1px solid black';
+//output2.textContent = 'click me';
+output2.style.textAlign = 'center';
+output2.style.width= '200px';
+output2.style.height = '150px';
+output2.style.margin = 'auto';
+output2.style.marginTop = '30px';
+output1.wasClicked = false;
+output2.wasClicked = false;
+const vals1 = output1.querySelectorAll('div');
+//console.log(vals1);
+vals1.forEach((el)=>{
+    el.onclick = function(e){
+        console.log(el.className);
+    }
+})
+
+
+const vals2 = output2.querySelectorAll('div');
+vals2.forEach((el)=>{
+    el.addEventListener('click',(e)=>{
+        console.log(el.className);
+    },true);
+})
+
+//console.log(vals2);
+
+output1.onclick = myEvent1;
+//function(e){
+    //console.log(output1.className);
+    //console.log(e.target);
+    //console.log(output1);
+    //console.log(this);
+//}
+function myEvent1(e){
+    console.log('myEvent1');
+    if(!e.target.wasClicked){
+        console.log(output1.className);
+    }
+    e.target.wasClicked =  true;
+    //console.log(e.target.wasClicked);
+    //console.log(e.target);
+    //console.log(output2);
+    //console.log(this);
+}
+//output2.addEventListener('click',myEvent2,{capture:true,once:true});
+output2.addEventListener('click',myEvent2);
+function myEvent2(e){
+    console.log('myEvent2');
+    output2.removeEventListener('click',myEvent2);
+    if(!e.target.wasClicked){
+        console.log(output2.className);
+    }
+    e.target.wasClicked =  true;
+    //console.log(e.target.wasClicked);
+
+        //console.log(e.target);
+        //console.log(output2);
+        //console.log(this);
+}
+

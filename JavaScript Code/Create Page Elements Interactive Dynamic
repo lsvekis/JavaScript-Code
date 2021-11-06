@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Code Example</title>
+</head>
+<body>
+    <div class="output"></div>
+    <script src="app2.js"></script>
+</body>
+</html>
+
+const output = document.querySelector('.output');
+const game = {num:4,counter:100,move:{},eles:[],speed:10};
+output.style.border = '1px solid black';
+output.style.height = '500px';
+output.style.width = '500px';
+const boundOutput = output.getBoundingClientRect();
+console.log(boundOutput);
+document.addEventListener('DOMContentLoaded',init);
+
+function init(){
+    console.log('ready');
+    for(let x=0;x<game.num;x++){
+        const el = maker('div',x +1,output,x);
+        console.log(el);
+        el.move = 0;
+        el.xPos = el.offsetLeft;
+        el.moveVal = game.speed;
+        el.addEventListener('click',moveMe);
+        game.eles.push(el);
+    }
+    game.move = window.requestAnimationFrame(updater);
+}
+function updater(){
+    game.eles.forEach((el)=>{
+        if(el.move > 0){
+            el.style.backgroundColor = 'red';
+            console.log(el.xPos);
+            if(el.xPos > boundOutput.right - el.offsetWidth || el.xPos < 0){
+                console.log('too far');
+                el.moveVal *= -1;
+            }
+            el.xPos += el.moveVal;
+            el.style.left = el.xPos + 'px';
+            el.textContent = el.move;
+            el.move--;
+
+        }else{
+            el.style.backgroundColor = 'white';
+        }
+    })
+    game.move = window.requestAnimationFrame(updater);    
+}
+
+function moveMe(){
+    console.log(this);
+    this.move = game.counter;
+}
+
+function maker(eleT,html,parentEle,pos){
+    const div = document.createElement(eleT);
+    div.textContent = html;
+    div.style.position = 'relative';
+    div.style.left = pos * 100 + 'px';
+    div.style.top = pos * 10 + 'px';
+    div.style.width = '50px';
+    div.style.height = '50px';
+    div.style.border = '1px solid black';
+    div.style.textAlign = 'center';
+    div.style.lineHeight = '50px';
+    return parentEle.appendChild(div);
+}
+

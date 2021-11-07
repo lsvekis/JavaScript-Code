@@ -1,0 +1,34 @@
+const output = document.querySelector('.output');
+const tempStr = 'Hello World';
+output.innerText = tempStr;
+output.setAttribute('contenteditable',true);
+
+output.addEventListener('click',(e)=>{
+    const bg = output.style.backgroundColor;
+    console.log(bg);
+    if(bg =='red'){
+        output.style.backgroundColor = 'white';
+    }else{
+        output.style.backgroundColor = 'red';
+    }
+    const val = revStr(output.innerText);
+    console.log(val);
+    output.innerText = val;
+})
+
+function revStr(val){
+    //let holder = '';
+    let arr = val.split('').reverse();
+    //let holder = arr.join('');
+    arr.forEach(letter =>{
+        //console.log(letter);
+    })
+    return val.split('').reverse().join('');
+}
+
+
+
+
+
+
+

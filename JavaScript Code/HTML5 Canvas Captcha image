@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Code Example</title>
+</head>
+<body>
+    <div class="output"></div>
+    <script src="app7.js"></script>
+</body>
+</html>
+
+const output = document.querySelector('.output');
+const myInput = document.createElement('input');
+const btn = document.createElement('button');
+const canvas = document.createElement('canvas');
+const ctx = canvas.getContext('2d');
+
+const opts = {
+    len : 5,
+    arr : '0123456789abcde$@',
+    cap : []
+}
+
+output.append(myInput);
+output.append(btn);
+output.prepend(canvas);
+
+myInput.style.display = 'block';
+canvas.width = 100;
+canvas.height = 30;
+btn.textContent = 'Submit';
+myInput.setAttribute('placeholder','captcha');
+myInput.setAttribute('maxlength',opts.len);
+myInput.style.width = '80px';
+
+window.addEventListener('DOMContentLoaded',init);
+btn.addEventListener('click',checkValid);
+myInput.addEventListener('focus',()=>{
+    myInput.style.borderColor = 'white';
+})
+
+function checkValid(){
+    const capCode = opts.cap.join('');
+    console.log(capCode);
+    if(myInput.value == capCode){
+        console.log('submit content');
+        //submit input value
+    }else{
+        console.log('Wrong code');
+        myInput.style.borderColor = 'red';
+        myInput.value = '';
+    }
+}
+
+function init(){
+    for(let i=0;i<opts.len;i++){
+        let char1 = ranChar();
+        opts.cap.push(char1);
+        console.log(char1);
+    }
+    addtoCanvas();
+}
+
+function ranChar(){
+    const ind = Math.floor(Math.random()*opts.arr.length);
+    let char = opts.arr[ind];
+    if(!opts.cap.includes(char)){
+        return char;
+    }
+    return ranChar();
+}
+
+function addtoCanvas(){
+    const val = opts.cap.join('');
+    ctx.font = '20px Georgia';
+    ctx.strokeText(val,0,20);
+}
+

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <title>Code Example</title>
+ <style>
+     .active{
+       color:green;
+       font-weight:bold;
+     }
+     .inactive{
+       color:#666;
+       font-weight:100;
+     }
+ </style>
+</head>
+<body>
+   <div class="output"></div>
+   <script src="app6.js"></script>
+</body>
+</html>
+
+const output = document.querySelector('.output');
+const output1 = document.createElement('div');
+const ul = document.createElement('ul');
+output.append(output1);
+output.append(ul);
+const url = 'data1.json';
+window.addEventListener('DOMContentLoaded',()=>{
+   output1.textContent = 'ready';
+   loadData();
+})
+ 
+function loadData(){
+   fetch(url).then(rep=>rep.json())
+   .then((data)=>{
+       //console.log(data);
+       addtoPage(data);
+   })
+}
+ 
+function addtoPage(arr){
+   arr.forEach((el)=>{
+       console.log(el);
+       const li = document.createElement('li');
+       li.textContent = el.name;
+       if(el.status){
+           li.classList.add('active');
+       }else{
+           li.classList.add('inactive');
+       }
+       ul.append(li);
+       li.addEventListener('click',(e)=>{
+           li.classList.toggle('active');
+           li.classList.toggle('inactive');
+       })
+   });
+}
+
+[
+   {
+       "name" : "Laurence",
+       "status" : true
+   },
+   {
+       "name" : "Svekis",
+       "status" : false
+   },
+   {
+       "name" : "JavaScript",
+       "status" : false
+   },
+   {
+       "name" : "HTML5",
+       "status" : true
+   }
+]
+

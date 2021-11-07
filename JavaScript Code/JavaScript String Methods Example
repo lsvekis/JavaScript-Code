@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Code Example</title>
+</head>
+<body>
+    <div class="output"></div>
+    <script src="app9.js"></script>
+</body>
+</html>
+
+const output = document.querySelector('.output');
+
+let str1 = 'Hello world Hello World';
+let str2 = new String(str1);
+console.log(str1.length);
+
+for(let x=0;x<str1.length;x++){
+    //console.log(str1[x]);
+    //console.log(str1.charAt(x));
+}
+
+console.log(typeof str1);
+console.log(typeof str2);
+
+//console.log(eval(str1));
+console.log(eval(str2));
+
+console.log(str1.includes('Hello'));
+console.log(str2.includes('Hello',4));
+
+let val = str2.indexOf('dwo');
+val = str2.lastIndexOf('or');
+val = str2.replace('or','WoW');
+val = str2.replaceAll('or','WoW');
+val = str1.split('o');
+val = str2.substring(2,-8);
+console.log(val);
+val = str2.substr(2,8);
+val = str2.slice(2,-8); 
+
+console.log(val);
+output.innerText = val;

@@ -53,7 +53,7 @@ Familiarize yourself with the core concepts of the JSON (JavaScript Object Notat
 </body>
 </html>
 
-const apiKey = 'AIzaSyAgjyUSKMXVohO0iG2-iP78anZ3C6wE-Qs';
+const apiKey = '**********s';
 const searchTerm = 'Svekis';
 const base = `https://www.googleapis.com/youtube/v3/search/?part=snippet&channelId=UCgsZ8_79Eclct_VDoql_Dwg&key=${apiKey}&q=`;
 

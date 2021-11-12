@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Example</title>
+</head>
+<body>
+  <div class="output"></div>
+  <input class="myInput">
+  <script src="app17.js"></script>
+</body>
+</html>
+
+const output = document.querySelector('.output');
+const myInput = document.querySelector('.myInput');
+const myLink = document.createElement('a');
+myLink.textContent = '';
+output.append(myLink);
+myLink.setAttribute('target','_blank');
+
+myInput.setAttribute('placeholder','add url');
+myInput.value = 'http://';
+const regex = new RegExp("^(http[s]?:\\/\\/(www\\.)?|ftp:\\/\\/(www\\.)?|www\\.){1}([0-9A-Za-z-\\.@:%_\+~#=]+)+((\\.[a-zA-Z]{2,3})+)(/(.)*)?(\\?(.)*)?");
+myInput.addEventListener('focusout',()=>{
+    if(regex.test(myInput.value)){
+        myLink.setAttribute('href',myInput.value);
+        const simpleTitle = myInput.value.replace('http://','');
+        myLink.textContent = simpleTitle;
+        myInput.style.backgroundColor = 'white';
+        myInput.value = 'http://';
+        myInput.style.color = 'black';
+    }else{
+        myLink.textContent = '';
+        myInput.style.backgroundColor = 'red';
+        myInput.style.color = 'white';
+    }
+})

@@ -1,0 +1,118 @@
+DATA API Gudie 
+
+https://developers.google.com/youtube/v3/docs/search/list
+
+https://developers.google.com/youtube/v3/sample_requests
+
+Googel Cloud Platform Dashboard
+
+https://console.cloud.google.com/apis/dashboard 
+
+YouTube Data API Overview 
+
+https://developers.google.com/youtube/v3/getting-started
+
+Introduction
+
+This document is intended for developers who want to write applications that interact with YouTube. It explains basic concepts of YouTube and of the API itself. It also provides an overview of the different functions that the API supports.
+
+Before you start
+
+You need a Google Account to access the Google API Console, request an API key, and register your application.
+
+Create a project in the Google Developers Console and obtain authorization credentials so your application can submit API requests.
+
+After creating your project, make sure the YouTube Data API is one of the services that your application is registered to use:
+
+Go to the API Console and select the project that you just registered.
+
+Visit the Enabled APIs page. In the list of APIs, make sure the status is ON for the YouTube Data API v3.
+
+If your application will use any API methods that require user authorization, read the authentication guide to learn how to implement OAuth 2.0 authorization.
+
+Select a client library to simplify your API implementation.
+
+Familiarize yourself with the core concepts of the JSON (JavaScript Object Notation) data format. JSON is a common, language-independent data format that provides a simple text representation of arbitrary data structures. 
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Example</title>
+  <style>
+    *{
+      box-sizing:border-box;
+    }
+    .box{
+      max-width:100%;
+    }
+  </style>
+</head>
+<body>
+   <div class="output">Hello World 2</div>
+   <script src="app16.js"></script>
+</body>
+</html>
+
+const apiKey = 'AIzaSyAgjyUSKMXVohO0iG2-iP78anZ3C6wE-Qs';
+const searchTerm = 'Svekis';
+const base = `https://www.googleapis.com/youtube/v3/search/?part=snippet&channelId=UCgsZ8_79Eclct_VDoql_Dwg&key=${apiKey}&q=`;
+
+const output = document.querySelector('.output');
+output.textContent = 'Search YouTube : ';
+const myInput = document.createElement('input');
+output.append(myInput);
+myInput.setAttribute('type','text');
+myInput.value = 'Svekis';
+
+const btn = document.createElement('button');
+btn.textContent = 'Get Data';
+btn.style.display = 'block';
+output.append(btn);
+
+const myList = document.createElement('div');
+output.append(myList);
+
+btn.addEventListener('click',(e)=>{
+    const url = `${base}${searchTerm}&maxResults=20`;
+    fetch(url).then(rep=>rep.json())
+    .then((data)=>{
+        addData(data.items);
+    })
+})
+
+function addData(arr){
+    myList.innerHTML = '';
+    const yt= 'https://youtu.be/';
+    arr.forEach((res)=>{
+        if(res.id.videoId){
+        const main = document.createElement('div');
+        main.style.border = '1px solid #ddd';
+        main.style.padding = '10px';
+        main.style.width = '25vw';
+        main.style.display = 'inline-block';
+        main.style.height = '40vw';
+        main.style.overflow = 'scroll';
+        myList.append(main);
+        //main.textContent = res.id.videoId;
+        const myLink = document.createElement('a');
+        myLink.textContent = res.id.videoId;
+        myLink.setAttribute('href',yt+res.id.videoId);
+        myLink.setAttribute('target','_blank');
+        console.log(res.snippet);
+
+        const thumb = document.createElement('img');
+        main.append(thumb);
+        thumb.setAttribute('src',res.snippet.thumbnails.medium.url);
+        thumb.classList.add('box');    
+
+        const des = document.createElement('p');
+        main.append(des);
+        
+        des.innerHTML = `<h3>${res.snippet.title}</h3><small>${res.snippet.description}</small>`;
+        des.append(myLink);
+        }
+
+
+    })
+}
+

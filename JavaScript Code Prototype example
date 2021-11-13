@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Example</title>
+</head>
+<body>
+  <div class="output"></div>
+  <script src='app24.js'></script>
+</body>
+</html>
+
+const output = document.querySelector('.output');
+
+function Person(first,last) {
+    this.first = first;
+    this.last = last;
+}
+
+const user1 =  new Person('Laurence','Svekis');
+const user2 =  new Person('Mike','Svekis1');
+Person.prototype.fullName = function(){
+    return `${this.first} ${this.last}`;
+}
+console.log(user1.fullName());
+output.innerHTML += user1.fullName() + '<br>';
+output.innerHTML += user2.fullName();
+

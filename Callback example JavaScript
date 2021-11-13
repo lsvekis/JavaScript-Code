@@ -1,0 +1,17 @@
+function output(callback,val){
+    callback(val);
+}
+
+function one(val){
+    console.log(`First ${val}`);
+}
+function two(val){
+    console.log(`Second ${val}`);
+}
+function three(val){
+    console.log(`Third ${val}`);
+}
+
+output(one,'Laurence');
+output(two,'Laurence');
+output(three,'Laurence');

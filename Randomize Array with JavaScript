@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Example</title>
+</head>
+<body>
+  <div class="output"></div>
+  <script src='app23.js'></script>
+</body>
+</html>
+
+const arr = ['one',44,'two',true,'three','test'];
+const output = document.querySelector('.output');
+sortArr();
+output.addEventListener('click',sortArr);
+
+function sortArr(){
+    arr.sort(()=>Math.random()-0.5);
+    output.innerHTML = arr.join(' ');
+}
+
+console.log(arr);
+arr.sort();
+console.log(arr);
+
+arr.sort((a,b)=>{
+    return a - b;
+})
+console.log(arr);
+
+arr.sort(()=>{
+    let val = Math.random() - 0.5;
+    //console.log(val);
+    return val;
+})
+for(let x=0;x<10;x++){
+    arr.sort(()=>Math.random()-0.5);
+    console.log(arr[0]);
+}
+
+

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Example</title>
+  <style>
+    .btn{
+      padding:5px;
+      font-size:0.9em;
+      display:inline-block;
+    }
+    .inputer{
+      display:block;
+    }
+  </style>
+</head>
+<body>
+  <div class="output">
+   
+  </div>
+
+  <script src='app22.js'></script>
+</body>
+</html>
+
+const output = document.querySelector('.output');
+const myInput = adder(output,false,'input','inputer');
+const btn1 = adder(output,'Encrypt','button','btn');
+const btn2 = adder(output,'Decrypt','button','btn');
+const message = adder(output,'','div','message');
+myInput.value = "Laurence Svekis";
+
+btn1.addEventListener('click',encrypto);
+btn2.addEventListener('click',decrypto);
+
+function encrypto(){
+    let val = btoa(myInput.value);
+    myInput.value = val;
+    console.log(val);
+    message.textContent= val;
+}
+
+function decrypto(){
+    let val = atob(myInput.value);
+    myInput.value = val;
+    console.log(val);
+    message.textContent= val;
+}
+
+
+
+function adder(parent,html,eleT,cla){
+    const ele = document.createElement(eleT);
+    if(html) ele.innerHTML = html;
+    if(cla) ele.classList.add(cla);
+    return parent.appendChild(ele);
+}

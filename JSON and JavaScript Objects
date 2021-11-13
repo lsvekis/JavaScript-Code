@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Example</title>
+</head>
+<body>
+  <div class="output"></div>
+  <script src='app25.js'></script>
+</body>
+</html>
+const output = document.querySelector('.output');
+
+const obj = [
+    {"first":"Laurence","last":"Svekis"},
+    {"first":"John","last":"Svekis"},
+    {"first":"Laurence","last":"Smith"}
+];
+let str1 = JSON.stringify(obj);
+const obj2 = obj;
+console.log(obj2[1].first);
+obj2[1].first = 'TEST';
+
+//console.log(obj);
+
+obj.forEach((item)=>{
+    //console.log(item);
+    output.innerHTML += `<div>${item.first} ${item.last}</div>`;
+})
+
+//str1 += 'Hello';
+//console.log(str1);
+output.innerHTML = str1;
+//output.innerHTML = obj;
+const obj1 = JSON.parse(str1);
+//console.log(obj1);
+

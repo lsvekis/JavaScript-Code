@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>JavaScript Code</title>
+  <style>
+    .box{
+      border:1px solid #ddd;
+      text-align:center;
+      cursor:grab;
+    }
+    .output{
+      display:grid;
+      width:80vw;
+      margin:auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="output"></div>
+  <script src="code1.js"></script>
+</body>
+</html>
+
+const output = document.querySelector('.output');
+const btn1 = document.createElement('button');
+output.append(btn1);
+btn1.textContent = 'click me 1';
+ 
+const btn2 = document.createElement('button');
+output.append(btn2);
+btn2.textContent = 'click me 2' ;
+ 
+/*
+output.addEventListener('click',(e)=>{
+   console.log(e.target);
+   console.log(output);
+},{once:true});
+*/
+ 
+btn1.addEventListener('click',updater);
+btn2.addEventListener('click',updater);
+function updater(e){
+   console.log(e.target);
+   //e.target.disabled = true;
+   const ele = e.target;
+   if(ele.style.backgroundColor == 'red'){
+       ele.style.backgroundColor = 'blue';
+       e.target.removeEventListener('click',updater);
+   }else{
+       ele.style.backgroundColor = 'red';
+   }
+}

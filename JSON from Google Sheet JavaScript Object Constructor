@@ -1,0 +1,22 @@
+const sheetID = '1rjX8XBRugvJdBT8M20Lg4YqvkWKyMtAkU6_wTSKP6-Y';
+const base = `https://docs.google.com/spreadsheets/d/${sheetID}/gviz/tq?`;
+const sheetName = 'Sheet1';
+const output = document.querySelector('.output');
+const query = encodeURIComponent('Select *');
+const url = `${base}&sheet=${sheetName}&tq=${query}`;
+const jsObj = [];
+    fetch(url)
+    .then(res => res.text())
+    .then(rep =>{
+        const data = JSON.parse(rep.substr(47).slice(0,-2));
+        const colz = [];
+        data.table.cols.forEach((heading)=>{
+            if(heading.label)colz.push(heading.label.toLowerCase());
+        })
+        data.table.rows.forEach((main)=>{
+            const row = {};
+            colz.forEach((ele,ind) => row[ele]= (main.c[ind] != null) ? main.c[ind].v : '')
+            jsObj.push(row);
+        })
+        console.log(jsObj);
+    })

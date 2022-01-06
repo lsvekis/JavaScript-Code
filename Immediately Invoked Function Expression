@@ -1,0 +1,13 @@
+(function(){
+    console.log('ready');
+})();
+
+(()=>{
+    console.log('ready arrow');
+})();
+
+((a=1,b=2,c=3)=>{
+    console.log(a,b,c);
+    const val = a * b * c;
+    console.log(val);
+})(5,6,7);

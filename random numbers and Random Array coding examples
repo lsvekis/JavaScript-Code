@@ -1,0 +1,32 @@
+const arr = [];
+const arr1 = [];
+
+for(let i=0;i<10;i++){
+    const val = ran(0,1000); 
+    arr.push(val.toString());
+}
+
+for(let i=0;i<20;i++){
+    const ind = Math.floor(Math.random()*arr.length);
+    const val = arr[ind];
+    console.log(ind,val);
+}
+
+function ran(min,max){
+    return Math.floor(Math.random()*(max-min+1))+min;
+}
+
+for(let i=1;arr1.push(i++)<50;);
+console.log(arr1);
+
+const arr2 = arr.sort();
+const arr3 = arr.reverse();
+arr.sort(()=>{
+    return Math.random() - 0.5;
+});
+console.log(arr[0]);
+arr.sort(()=>{
+    return Math.random() - 0.5;
+});
+console.log(arr[0]);
+

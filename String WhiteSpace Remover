@@ -1,0 +1,18 @@
+String.prototype.cleaner = function(){
+    return this.replace(/\s+/g,' ').trim();
+}
+
+const myStr1 = "  Hello    World   ";
+console.log(myStr1.cleaner());
+
+let val = myStr1;
+val = trimMyString(val);
+console.log(val);
+document.querySelector('.output').textContent = val;
+
+function trimMyString(str){
+    let val = str.replace(/\s+/g,' ').trim();
+    //val = str.trimLeft();
+    //val = str.trimRight();
+    return val;
+}

@@ -1,0 +1,62 @@
+let a = [10];
+let b = 10;
+let c = "10";
+
+
+
+if(a == b) console.log(`${a} == ${b}`);
+if(a == c) console.log(`${a} == ${c}`);
+
+if(a === b) console.log(`${a} === ${b}`);
+if(a === c) console.log(`${a} === ${c}`);
+
+if(a != b) console.log(`${a} != ${b}`);
+if(a != c) console.log(`${a} != ${c}`);
+
+if(a !== b) console.log(`${a} !== ${b}`);
+if(a !== c) console.log(`${a} !== ${c}`);
+
+
+let d = [];
+let e = 0;
+let f = false;
+let g = '';
+let h = null;
+let i = undefined;
+let j = NaN;
+
+
+console.clear();
+if(d == e) console.log(`D ${d} == ${e}`);
+if(e == f) console.log(`E ${e} == ${f}`);
+if(f == g) console.log(`F ${f} == ${g}`);
+if(g == h) console.log(`G ${g} == ${h}`);
+if(h == i) console.log(`H ${h} == ${i}`);
+if(i == j) console.log(`I ${i} == ${j}`);
+if(j == d) console.log(`J ${j} == ${d}`);
+
+if(g == d) console.log(`GD ${g} == ${d}`);
+if(f == h) console.log(`FH ${f} == ${h}`);
+if(f == i) console.log(`FI ${f} == ${i}`);
+if(f == j) console.log(`FJ ${f} == ${j}`);
+
+console.clear();
+if(!d) console.log(`D Yes ${d}`);
+if(!e) console.log(`E Yes ${e}`);
+if(!f) console.log(`F Yes ${f}`);
+if(!g) console.log(`G Yes ${g}`);
+if(!h) console.log(`H Yes ${h}`);
+if(!i) console.log(`I Yes ${i}`);
+if(!j) console.log(`J Yes ${j}`);
+
+
+
+
+if(d === e) console.log(`D ${d} === ${e}`);
+if(e === f) console.log(`E ${e} === ${f}`);
+if(f === g) console.log(`F ${f} === ${g}`);
+if(g === h) console.log(`G ${g} === ${h}`);
+if(h === i) console.log(`H ${h} === ${i}`);
+if(i === j) console.log(`I ${i} === ${j}`);
+if(j === d) console.log(`J ${j} === ${d}`);
+

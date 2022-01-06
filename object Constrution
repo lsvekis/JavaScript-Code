@@ -1,0 +1,17 @@
+function FullName(firstName,lastName){
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.full = `${firstName} ${lastName}`;
+}
+
+const person1 = new FullName("Laurence","Svekis");
+console.log(person1.full);
+
+const person2 = new FullName("John","Svekis");
+console.log(person2.full);
+
+const person3 = new FullName("Mike","Smith");
+console.log(person3.full);
+
+let val = `${person1.firstName} ${person1.lastName}`;
+console.log(val);

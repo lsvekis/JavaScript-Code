@@ -1,0 +1,19 @@
+let val = 5;
+val = 6;
+
+if(val == 5) {fun1(1);}
+if(val == 5) fun1(2);
+val == 5 && fun1(3);
+
+val == 5 || fun1(4);
+if(val != 5) fun1(5);
+
+fun1();
+let val2;
+val2 = val2 || 100;
+console.log(val2);
+
+function fun1(v=1){
+    v = v || 1;
+    console.log(`Hello ${v}`);
+}

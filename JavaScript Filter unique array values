@@ -1,0 +1,65 @@
+const arr1 = ["Laurence","Svekis","Hello","World","Cat"];
+
+const arr2 = arr1.filter((val,ind,arr)=>{
+    console.log(val,ind,arr);
+    return val.length > 5;
+})
+
+const arr3 = arr1.filter(callbackFun);
+
+const arr4 = arr1.filter(val => val.length > 5);
+
+function callbackFun(val,ind,arr){
+    console.log(val,ind,arr);
+    return val.length > 5;
+}
+
+console.log(arr1);
+console.log(arr2);
+console.log(arr3);
+console.log(arr4);
+console.clear();
+
+const arr5 = [3223,234,5,23,23333,43,34,34,34,34];
+
+const arr6 = arr5.filter(val => val > 100);
+const arr7 = arr5.filter(checker);
+
+function checker(val){
+    console.log(`${val} = ${val % 2}`);
+    return val % 2;
+}
+
+console.log(arr6);
+console.log(arr7);
+
+const arr8 = [0,1,0,1,1,1,1,true,false,true];
+const arr9 = arr8.filter(val => val);
+
+console.log(arr9);
+
+const arr10 = arr5.filter(checker2);
+function checker2(val,ind,arr){
+    console.log(`${arr.indexOf(val)} = ${ind}`);
+    return arr.indexOf(val) == ind;
+}
+
+console.log(arr10);
+
+const arr11 = ["Laurence","Svekis","Hello","World","Cat","Laurence","Svekis","Cat","Laurence","Svekis","Cat","Laurence","Svekis","Cat","Laurence","Svekis","Dog","Laurence","Svekis",];
+console.log(arr11.filter(checker2));
+
+const arr12 = [{name:"Svekis 1",id:10},{name:"Svekis 2",id:1},{name:"Svekis 3",id:100},{name:"Svekis 4",id:50},{name:"Svekis 5",id:20}];
+
+const arr13 = arr12.filter((val)=>{
+    return val.id;
+})
+
+console.log(arr13);
+
+const validID = [50,100];
+const arr14 = arr12.filter((val)=>{
+    return validID.includes(val.id);
+})
+
+console.log(arr14);

@@ -1,0 +1,33 @@
+const arr1 = [1,4,54,23,5,7,34,66,1000];
+const arr2 = ["Svekis","a","World","He"];
+const arr3 = ["Svekis","Laurence","Cat","Hello","a","World"];
+let val = arr1.every((ele)=>{
+    console.log(ele);
+    return ele < 10;
+})
+
+val = arr1.every(callBackFun);
+
+function callBackFun(ele,ind,arr){
+    console.log(`${ele} ${ind}`);
+    return ele < 1000;
+}
+
+console.log(val);
+
+console.log(arr1.every(x => x < 10000));
+console.log(arr1.every(x => x < 1000));
+console.clear();
+val = arr2.every((ele)=>{
+    console.log(ele);
+    return ele.length < 15;
+})
+console.log(val);
+
+
+console.clear();
+val = arr2.every((ele)=>{
+    console.log(ele);
+    return arr3.includes(ele);
+})
+console.log(val);

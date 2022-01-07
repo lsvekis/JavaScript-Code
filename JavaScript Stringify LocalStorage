@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+   <head>
+       <title>JavaScript Course</title>    
+   </head>
+   <body>
+       <input type="text">
+       <button>Check</button>
+       <div class="output">Output</div>
+       <script src="code6.js"></script>
+   </body>
+</html>
+ 
+const str1 = "Laurence Svekis";
+const myObj = {
+   first : "Laurence",
+   last : "Svekis",
+   id : 100
+};
+ 
+const myInput = document.querySelector('input');
+const btn = document.querySelector('button');
+const output = document.querySelector('.output');
+document.addEventListener('DOMContentLoaded',init);
+btn.addEventListener('click',btnClicker);
+ 
+function btnClicker(){
+   const val = myInput.value;
+   if(val.length > 0){
+       let user = JSON.parse(localStorage.getItem('user'));
+       user.first = val;
+       console.log(user);
+       localStorage.setItem('user',JSON.stringify(user));
+   }
+}
+ 
+function init(){
+   console.log('ready');
+   output.innerHTML = '';
+   let val = localStorage.getItem('user');
+   let user = JSON.parse(val);
+   if(!user.first){
+       let storeObj = JSON.stringify(myObj);
+       localStorage.setItem('user',storeObj);
+   }else{
+       output.textContent = `${user.first} ${user.last}`;
+   }
+   console.log(val);
+}

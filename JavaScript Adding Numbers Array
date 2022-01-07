@@ -1,0 +1,25 @@
+const arr1 = [32,43,556,2,3,4,4345];
+
+let total = 0;
+for(let i=0;i<arr1.length;i++){
+    console.log(arr1[i],total);
+    total += arr1[i];
+}
+console.log(total);
+/*
+total = 0;
+for(let i in arr1){
+    console.log(arr1[i],total);
+    total += arr1[i];
+}
+console.log(total);
+*/
+
+total = 0;
+for(let i=0,len=arr1.length;i<len;i++){
+    console.log(arr1[i],total);
+    total += arr1[i];
+}
+console.log(total);
+
+

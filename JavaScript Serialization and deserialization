@@ -1,0 +1,55 @@
+const output = document.querySelector('.output');
+const arr1 = ["Svekis","Laurence",1000,true];
+const obj1 = {
+    first : "Laurence",
+    last : "Svekis",
+    id : 1000,
+    num : 55,
+    mes : "Hello",
+    boo : false
+};
+
+output.textContent = arr1;
+output.textContent = obj1;
+
+console.log(arr1);
+console.log(obj1);
+
+let val = JSON.stringify(obj1)
+val = JSON.stringify(arr1);
+console.log(val);
+output.textContent = val;
+output.textContent += arr1;
+console.clear();
+val = JSON.stringify(obj1,rep);
+
+function rep(key,value){
+    console.log(key,value);
+    if( typeof value === 'number'){
+        return undefined;
+    }
+    return value;
+}
+output.textContent = val;
+
+val = JSON.stringify(obj1,['num','first']);
+output.textContent = val;
+
+val = JSON.stringify(obj1,null);
+output.textContent = val;
+console.log(val);
+val = JSON.stringify(obj1,null,' ');
+output.textContent += val;
+console.log(val);
+
+const str1 = JSON.stringify(obj1,['num','first']);
+const str2 = JSON.stringify(arr1);
+console.clear();
+console.log(str1);
+console.log(str2);
+
+const ob1 = JSON.parse(str1);
+const ob2 = JSON.parse(str2);
+console.clear();
+console.log(ob1);
+console.log(ob2);

@@ -1,0 +1,26 @@
+const arr = ["Svekis","Laurence",1000,20,300,true,323,"Svekis"];
+const arr1 = arr.map(String);
+console.log(arr1);
+
+const myInput = document.querySelector('input');
+const btn = document.querySelector('button');
+const output = document.querySelector('.output');
+
+btn.addEventListener('click',(e)=>{
+    const val = myInput.value;
+    const result = arr1.includes(val);
+    let message;
+    if(result){
+        message= `${result} is found in the array content`;
+    }else{
+        message = `${result} is NOT found`;
+    }
+    output.textContent = message;
+    console.log(result);
+})
+
+let val = arr.includes("Svekis");
+console.log(val);
+
+val = arr.includes("Svekis",-1);
+console.log(val);

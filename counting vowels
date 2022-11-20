@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>JavaScript</title>
+</head>
+<body>
+    <input type="text"><button>Check</button>
+    <div class="output"></div>
+    <script src="app1.js"></script>
+</body>
+</html>
+
+const output = document.querySelector('.output');
+const btn = document.querySelector('button');
+const myInput = document.querySelector('input');
+
+
+btn.addEventListener('click',()=>{
+    const lenVal = myInput.value.length;
+    counterVowels(myInput.value);
+})
+
+const str1 = 'Laurence Svekis';
+const str2 = 'hello World';
+//console.log(output);
+counterVowels(str2);
+
+function counterVowels(val){
+    const total = val.length;
+    const m = val.match(/[aeiou]/gi);
+    console.log(m.length);
+    const listVowels = m.join(' - ');
+    output.innerHTML = `<div><b>${val}</b></div>`;
+    output.innerHTML += `<div>Total Length ${total}</div>`;
+    output.innerHTML += `<div>Vowels Total ${m.length}</div>`;
+    output.innerHTML += `<div>Others ${total - m.length}</div>`;
+    output.innerHTML += `<div>${listVowels}</div>`;
+    
+}

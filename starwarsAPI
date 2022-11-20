@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>JavaScript</title>
+</head>
+<body>
+    <select>
+        <option>films</option>
+        <option>people</option>
+        <option>planets</option>
+    </select>
+    <button>Connect</button>
+    <div class="output"></div>
+    <script src="app2.js"></script>
+</body>
+</html>
+
+const selVal = document.querySelector('select');
+const btn = document.querySelector('button');
+const output = document.querySelector('.output');
+const url = 'https://swapi.dev/api/';
+btn.addEventListener('click',()=>{
+    console.log(selVal.value);
+    btn.disabled = true;
+    output.innerHTML = 'searching....';
+    fetch(url+'/'+selVal.value)
+    .then(res => res.json())
+    .then(data => {
+        myOutput(data,selVal.value);
+    })
+})
+
+function myOutput(data,val){
+    const total = data.results;
+    const itemName = val == 'films' ? 'title' : 'name';
+    btn.disabled = false;
+    output.innerHTML = `Search for ${val}`;
+    console.log(data);
+    total.forEach(ele => {
+        output.innerHTML += `<div>${ele[itemName]}</div>`;
+    });
+}

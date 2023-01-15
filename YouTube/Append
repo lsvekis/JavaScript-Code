@@ -1,0 +1,29 @@
+const output = document.querySelector('#output');
+const pageBody = document.body;
+
+const el1 = document.createElement('h1');
+el1.textContent = 'Hello World 1';
+console.log(el1);
+
+pageBody.append(el1);
+output.append(el1);
+
+const res1 = output.appendChild(el1);
+console.log(res1);
+
+res1.textContent = 'Hello 1';
+el1.textContent = 'Hello 2';
+
+output.before(el1);
+output.after(el1);
+
+output.prepend(el1);
+
+const ul = document.createElement('ul');
+output.append(ul);
+
+for(let i=0;i<10;i++){
+    const li1 = document.createElement('li');
+    li1.textContent = `#${i+1}`;
+    ul.append(li1);
+}

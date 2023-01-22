@@ -1,0 +1,27 @@
+const a = 'hello';
+console.log(a);
+abc();
+
+function abc(){
+    //const a = 'world';
+    console.log(a);
+}
+
+function myCount(){
+    let count = 0;
+    return function(){
+        return count++;
+    }
+}
+function myCount2(){
+    let count = 0 ;
+    return count++;
+}
+
+let cnt = myCount();
+let cnt2 = myCount2;
+
+for(let x=0;x<10;x++){
+    console.log(cnt());
+    console.log(cnt2());
+}

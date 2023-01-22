@@ -1,0 +1,32 @@
+const output = document.querySelector('.output');
+const url = 'https://www.discoveryvip.com/shared/person1000.json';
+const xhr = new XMLHttpRequest();
+xhr.open('GET',url);
+xhr.onload = function(){
+    if(xhr.status === 200){
+        const data = JSON.parse(xhr.responseText);
+        maker(data);
+    }else{
+        console.error(xhr.statusText);
+    }
+}
+xhr.onerror = function(){
+    console.error(xhr.statusText);
+}
+xhr.send();
+output.innerHTML += '<hr>';
+
+fetch(url)
+    .then(res => res.json())
+    .then(data =>   maker(data))
+    .catch(error => console.log(error));
+
+
+function maker(data){
+    data.forEach(ele =>{
+        output.innerHTML += `
+        <div>${ele.name.first} ${ele.name.last} ${ele.age}</div>
+        <small>${JSON.stringify(ele)}</small>`;
+    })
+    output.innerHTML += '<hr>';
+}

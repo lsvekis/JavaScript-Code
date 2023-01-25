@@ -1,0 +1,28 @@
+const ele1 = document.createElement('div');
+ele1.textContent = 'My new element';
+document.body.prepend(ele1);
+
+const output = document.querySelector('.output');
+output.innerHTML += '<div>Laurence</div>';
+output.innerHTML += '<div>Hello World</div>';
+output.style.border = '1px solid red';
+
+const ele2 = document.createElement('h2');
+ele2.innerHTML = 'Laurence Svekis';
+const el = output.appendChild(ele2);
+console.log(el);
+
+const ele3 = document.createElement('h2');
+ele3.innerHTML = 'Laurence Svekis';
+const el2 = output.append(ele3);
+console.log(el2);
+
+output.insertAdjacentHTML('beforebegin','<p>Para1</p>');
+output.insertAdjacentHTML('beforeend','<p>Para2</p>');
+output.insertAdjacentHTML('afterbegin','<p>Para3</p>');
+output.insertAdjacentHTML('afterend','<p>Para4</p>');
+
+const ele4 = document.createElement('h3');
+ele4.textContent = 'Laurence Svekis';
+output.insertAdjacentElement('beforebegin',ele4);
+output.insertAdjacentText('beforeend','Hello World 4');

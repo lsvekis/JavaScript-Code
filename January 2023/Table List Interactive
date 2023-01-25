@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Learn JavaScript</title>
+    <style>
+        table{
+            width:100%;
+        }
+        td:first-child{
+            width:10%;
+        }
+        td:last-child{
+            width:10%;
+        }
+        td{
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <h1>Learn JavaScript Course </h1>
+    <div>
+        <input type="text" id="addFriend" >
+        <input type="button" id="addNew" value="Add New">
+        <div class="output"></div>
+    </div>
+    <script src="app10.js"></script>
+</body>
+</html>
+
+
+const myArr = [
+    {name:'Laurence',score:0,id:1} ,
+    {name:'Susan',score:0,id:2} ,
+    {name:'Lisa',score:0,id:3} 
+];
+const output = document.querySelector('.output');
+const btn = document.querySelector('#addNew');
+const addFriend = document.querySelector('#addFriend');
+const tblOutput = document.createElement('table');
+output.append(tblOutput);
+addFriend.value = 'Laurence';
+build();
+
+btn.addEventListener('click',()=>{
+    const myObj =   {name:addFriend.value,score:0,id:myArr.length+1} ;
+    myArr.push(myObj );
+    console.log(myArr);
+    build();
+})
+
+function build(){
+    tblOutput.innerHTML = '';
+    myArr.forEach((ele,ind) =>{
+        const tr = document.createElement('tr');
+        tblOutput.append(tr);
+        const td1 = document.createElement('td');
+        td1.textContent = ele.id;
+        tr.append(td1);
+        const td2 = document.createElement('td');
+        td2.textContent = ele.name;
+        tr.append(td2);
+        const td3 = document.createElement('td');
+        td3.textContent = ele.score;
+        tr.append(td3);
+        tr.addEventListener('click',()=>{
+            ele.score++;
+            td3.textContent = ele.score;
+        })
+    })
+
+}

@@ -1,0 +1,10 @@
+///'use strict'
+
+x = 10;
+console.log(x);
+
+(function() {
+    ///'use strict'
+    y = 20;
+    console.log(y);
+})();

@@ -1,0 +1,17 @@
+let myName = 'Laurence Svekis';
+myName = 'Laurence Smith';
+let b = 'global scope';
+
+function test(){
+    let a = 'within the function';
+    console.log(b);
+}
+
+test();
+
+const c = [1,2,3];
+c[3] = 4;
+c[1] = 'New';
+console.log(c);
+
+console.log(myName);

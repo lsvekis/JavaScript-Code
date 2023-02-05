@@ -1,0 +1,34 @@
+const sum1 = function(x,y){
+    return x + y;
+};
+console.log(sum1(3,4));
+
+const sum2 = (x,y) => {
+    return x + y;
+};
+console.log(sum2(3,4));
+
+const sum3 = (x,y) => x + y;
+console.log(sum3(3,4));
+
+const person = {
+    name:'Laurence Svekis 1',
+    greet : function(){
+        setTimeout(function(){
+            console.log(`Hello, ${this.name}`)
+        },1000);
+    }
+}
+
+person.greet();
+
+const person1 = {
+    name:'Laurence Svekis 2',
+    greet : ()=>{
+        setTimeout(()=>{
+            console.log(`Hello, ${this.name}`)
+        },1000);
+    }
+}
+
+person1.greet();

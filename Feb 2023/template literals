@@ -1,0 +1,22 @@
+const name = 'Laurence Svekis';
+const message = `Hi, ${name}`;
+console.log(message);
+
+const add1 = `4 + 5 = ${4+5}`;
+console.log(add1);
+
+const name1 = 'Laurence';
+const age = 40;
+const output = `My name is ${name1} I'm ${age} years old`;
+console.log(output);
+
+const mes = `Hi,
+How are you?
+Is your name ${name1}?`;
+document.querySelector('.output').textContent = mes;
+console.log(mes);
+
+const a = 5;
+const b = 12;
+
+console.log(`Result of ${a} + ${b} is ${a+b}`);

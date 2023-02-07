@@ -1,0 +1,33 @@
+const colors = ['red','green','blue'];
+const [a,b,c] = colors;
+console.log(a,b,c);
+
+const numbers = [1,2,3,4,5];
+const [first,second, ...rest] = numbers;
+console.log(numbers);
+
+console.log(first);
+console.log(second);
+console.log(rest);
+
+const person = {
+    name : 'Laurence Svekis',
+    age : 40,
+    loc : 'Ontario'
+}
+console.log(person);
+const {name,age,loc} = person;
+console.log(name);
+console.log(age);
+console.log(loc);
+
+const person1 = {
+    name : 'Laurence Svekis',
+    age : 40,
+    location : 'Ontario'
+}
+
+const {name:fullName,age:personsAge,location:city} = person1;
+console.log(fullName);
+console.log(personsAge);
+console.log(city);
